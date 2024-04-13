@@ -1,0 +1,395 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.none{
+  display: none;
+}
+.none .navbar-menu{
+  display: none;
+}
+header {
+  padding: 10px 20px;
+  max-width: 1500px;
+  margin: auto;
+}
+header ul {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 26px;
+}
+
+header ul li {
+  display: flex;
+  align-items: center;
+}
+header ul li input {
+  padding: 10px;
+  width: 300px;
+  height: 40px;
+  outline: blue;
+  font-size: 16px;
+  border: 1px solid hsl(0, 0%, 35%);
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+header ul li button {
+  padding: 10px 20px;
+  border: 1px solid hsl(0, 0%, 35%);
+  border-left: none;
+  height: 40px;
+  font-size: 15px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+header ul li a {
+  text-decoration: none;
+}
+
+header ul li span {
+  display: flex;
+}
+
+header ul li {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+header ul li span a {
+  font-size: 18px;
+}
+
+nav {
+  padding: 0px 20px;
+  max-width: 1500px;
+  margin: auto;
+}
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  list-style: none;
+  font-size: 18px;
+}
+
+nav ul li a {
+  color: black;
+  text-decoration: none;
+}
+
+footer {
+  padding: 40px 20px;
+  max-width: 1500px;
+  margin: auto;
+}
+footer .parent {
+  display: flex;
+  justify-content: space-between;
+}
+footer .child ul {
+  list-style: none;
+}
+footer ul li {
+  font-size: 16px;
+  color: hsl(0, 0%, 50%);
+  line-height: 40px;
+}
+footer ul li i {
+  font-size: 20px;
+  margin: 20px 10px;
+}
+footer span {
+  font-weight: 500;
+}
+footer ul li i:nth-child(1) {
+  color: rgb(205, 147, 31);
+  font-size: 25px;
+}
+footer ul li i:nth-child(2) {
+  color: rgb(0, 110, 255);
+  font-size: 25px;
+}
+footer ul li i:nth-child(3) {
+  color: black;
+  font-size: 25px;
+}
+footer ul li i:nth-child(4) {
+  color: blue;
+  font-size: 25px;
+}
+
+.underFooter {
+  max-width: 1500px;
+  padding: 20px 50px;
+  margin: auto;
+}
+
+
+
+@media (min-width: 770px) and (max-width: 989px){
+  header {
+    padding: 10px 10px;
+  }
+  header ul li input {
+    width: 280px;
+    height: 37px;
+  }
+  header ul li button {
+    padding: 10px 20px;
+    height: 37px;
+  }
+  nav {
+    padding: 0px 10px;
+  }
+  nav ul {
+    gap: 18px;
+  }
+  footer {
+    padding: 40px 10px;
+  }
+  .underFooter {
+    padding: 10px 40px;
+  }
+}
+
+@media (min-width: 448px) and (max-width: 769px){
+  .none {
+    background-color: #fff;
+    padding: 10px 20px;
+  }
+  .none .child{
+    display: flex;
+    justify-content: space-between;
+  }
+  .none .navbar-logo{
+    font-size: 20px;
+    display: flex;
+    text-decoration: none;
+  }
+  
+  .none .navbar-item {
+    margin-right: 20px;
+    display: block;
+  }
+  
+  .none .navbar-link {
+    color: #000;
+    text-decoration: none;
+  }
+  .navbar-menu {
+    z-index: 3;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+
+  .navbar-item {
+    padding: 10px 5px;
+  }
+
+  .navbar-toggle {
+    display: block;
+    color: blue;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+  }
+  .none .active {
+    display: block;
+  }
+  header {
+    display: none;
+  }
+  nav {
+    display: none;
+  }
+  .none{
+    display: block;
+  }
+  .none ul{
+    padding: 10px 30px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    font-size: 20px;
+  }
+  .none ul li a{
+    text-decoration: none;
+    color: blue;
+  }
+  .none ul i{
+    color: blue;
+  }
+  .none .child:nth-child(2){
+    width: 100%;
+    display: flex;
+    margin: 10px 0px;
+  }
+  .none input{
+    width: 90%;
+    padding: 10px;
+    height: 35px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid hsl(0, 0%, 35%);
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .none .child:nth-child(2) button {
+    width: 10%;
+    padding: 6px 10px;
+    border: 1px solid hsl(0, 0%, 35%);
+    border-left: none;
+    height: 35px;
+    font-size: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  footer {
+    padding: 40px 10px;
+  }
+  footer .parent{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  footer .child {
+    width: calc(100%/2);
+
+  }
+  .underFooter {
+    padding: 10px 40px;
+  }
+}
+
+@media (max-width: 447px){
+  .none {
+    background-color: #fff;
+    padding: 10px 20px;
+  }
+  .none .child{
+    display: flex;
+    justify-content: space-between;
+  }
+  .none .navbar-logo{
+    font-size: 20px;
+    display: flex;
+    text-decoration: none;
+  }
+  
+  .none .navbar-item {
+    margin-right: 20px;
+    display: block;
+  }
+  
+  .none .navbar-link {
+    color: #000;
+    text-decoration: none;
+  }
+  .navbar-menu {
+    z-index: 3;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+  }
+
+  .navbar-item {
+    padding: 10px;
+  }
+
+  .navbar-toggle {
+    display: block;
+    color: blue;
+    font-size: 1.5rem;
+    background: transparent;
+    border: none;
+  }
+  .none .active {
+    display: block;
+  }
+  header {
+    display: none;
+  }
+  nav {
+    display: none;
+  }
+  .none{
+    display: block;
+  }
+  .none ul{
+    padding: 10px 30px;
+    display: flex;
+    list-style: none;
+    justify-content: space-between;
+    font-size: 20px;
+  }
+  .none ul li a{
+    text-decoration: none;
+    color: blue;
+  }
+  .none ul i{
+    color: blue;
+  }
+  .none .child:nth-child(2){
+    width: 100%;
+    padding: 0px 0px;
+    display: flex;
+  }
+  .none input{
+    width: 90%;
+    padding: 10px;
+    height: 30px;
+    outline: blue;
+    font-size: 16px;
+    border: 1px solid hsl(0, 0%, 35%);
+    border-right: none;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+  }
+  .none .child:nth-child(2) button {
+    width: 10%;
+    padding: 5px 10px;
+    border: 1px solid hsl(0, 0%, 35%);
+    border-left: none;
+    height: 30px;
+    font-size: 15px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+
+  header {
+    display: none;
+  }
+  nav {
+    display: none;
+  }
+  footer {
+    padding: 40px 10px;
+  }
+  footer .parent{
+    display: flex;
+    flex-wrap: wrap;
+  }
+  footer .child{
+    width: 100%;
+    text-align: center;
+  }
+  footer .child ul li{
+    text-align: center;
+  }
+  .underFooter {
+    padding: 10px 40px;
+  }
+}
