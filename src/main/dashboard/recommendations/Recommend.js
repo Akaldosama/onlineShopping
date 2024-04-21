@@ -11,7 +11,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import '../../../ForAllComponents.css'
 
-export default function Recommend({searchQuery}) {
+export default function Recommend({ searchQuery }) {
   const [recommendations, setRecommendations] = useState([]);
   
 
@@ -24,23 +24,20 @@ export default function Recommend({searchQuery}) {
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const recommendationsPerPage = 28;
-
+  const recommendationsPerPage = 24;
+  
   const indexOfLastRecommend = currentPage * recommendationsPerPage;
   const indexOfFirstRecommend = indexOfLastRecommend - recommendationsPerPage;
-  const currentRecommendations = filteredRecommendations?.slice(
-    indexOfFirstRecommend,
-    indexOfLastRecommend
-  );
-
+  const currentRecommendations = filteredRecommendations?.slice(indexOfFirstRecommend, indexOfLastRecommend);
   const fetchData = () => {
     axios
-      .get("http://localhost:8000/recommendations")
-      .then((res) => {
-        console.log(res.data);
-        setRecommendations(res.data);
-      })
-      .catch((error) => {
+    .get("http://localhost:8000/recommendations")
+    .then((res) => {
+      setRecommendations(res?.data);
+      console.log(recommendations)
+      console.log(filteredRecommendations)
+    })
+    .catch((error) => {
         console.log(error);
       });
   };
@@ -58,7 +55,6 @@ export default function Recommend({searchQuery}) {
           naturalSlideHeight={35}
           totalSlides={3}
           isPlaying={true}
-          className="carousel"
         >
           <Slider>
             <Slide index={0}>
@@ -94,9 +90,9 @@ export default function Recommend({searchQuery}) {
         </CarouselProvider>
       </div>
 
-        <div className="wrapper">
-          <div className="title">Recommendations</div>
-          <div className="parent">
+      <div className="wrapper">
+        <div className="title">Recommendations</div>
+        <div className="parent">
           {currentRecommendations?.map((item, index) => {
             return (
               <div className="child" key={index}>
@@ -107,7 +103,7 @@ export default function Recommend({searchQuery}) {
                   </Link>
                 </div>
                 <div className="box">
-                  <p>{item.brand}</p>
+                  <p>{item.model}</p>
                   <span>
                     <h4>{item.price}$</h4>
                     <i class="fa-solid fa-basket-shopping"></i>
@@ -127,15 +123,14 @@ export default function Recommend({searchQuery}) {
             </button>
             <span>
               {currentPage} /{" "}
-              {Math.ceil(filteredRecommendations?.length / recommendationsPerPage)}
+              {Math.ceil(filteredRecommendations.length / recommendationsPerPage)}
             </span>
             <button
               onClick={() => setCurrentPage(currentPage + 1)}
               disabled={
                 currentPage ===
-                Math.ceil(filteredRecommendations?.length / recommendationsPerPage)
-              }
-            >
+                Math.ceil(filteredRecommendations.length / recommendationsPerPage)
+              }>
               Next
             </button>
           </div>

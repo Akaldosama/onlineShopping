@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
-import '../../../../ForAllSingleComponents.css'
-import ModalComponent from '../../../../modal/Modal'
+import ModalComponent from '../modal/Modal'
+import '../ForAllSingleComponents.css'
 
 
-export default function SingleRecommendations() {
+export default function SingleClothe() {
 
     const [modal, setModal] = useState(false)
     
@@ -20,7 +20,7 @@ export default function SingleRecommendations() {
     console.log(id)
 
     const fetchData = () => {
-        axios.get('http://localhost:8000/recommendations')
+        axios.get('http://localhost:8000/clothes')
         .then((res) => {
             setSingle(res.data.filter(item => item.id == id))
         }).catch(err => console.log(err))
@@ -30,11 +30,23 @@ export default function SingleRecommendations() {
         fetchData()
     }, [])
 
+    const calculatePrice = () => {
+        return count * single[0]?.price; // Assuming single[0] contains the item data
+    }
+
+    const sendBasket = (item) => {
+        axios.post('http://localhost:8000/basket', item)
+            .then((res) => {
+                console.log('Element added successfully', res.data);
+                // setSingle([]); // Clear the single state after successful submission
+            })
+        .catch(err => console.log(err));
+    }
 
 
   return (
-    <div className='wrapper'>
-        <ModalComponent open={modal} toggle={toggle} />     
+    <div className='container'>
+        <ModalComponent open={modal} toggle={toggle}  itemModel={single[0]?.model} itemPrice={calculatePrice()} itemCount={count} itemSize={size} />     
 
         {
             single?.map((item, index) => {
@@ -52,16 +64,16 @@ export default function SingleRecommendations() {
                         </div>
                         <p>Amount:</p>
                         <span>
-                            <button onClick={() => setCount((prev) => count <= 1 ? 1 : prev - 1)}><i class="fa-solid fa-minus"></i></button>
+                            <button onClick={() => setCount((prev) => count <= 1 ? 1 : prev - 1)} className='btn'><i class="fa-solid fa-minus"></i></button>
                             {count}
-                            <button onClick={() => setCount((prev) => prev + 1)}><i class="fa-solid fa-plus"></i></button>
+                            <button onClick={() => setCount((prev) => prev + 1)} className='btn'><i class="fa-solid fa-plus"></i></button>
                         </span>
                         <p>Price:</p>
-                        <h3 className='price'>{count * item.price}$</h3>
+                        <h3 className='price'>{calculatePrice()}$</h3>
                         <p className='desc'>{item.description}</p>
                         <div className='box'>
                             <button onClick={() => toggle(true)} className='btn btn-primary'>BUY NOW</button>
-                            <button className='btn btn-light border-primary'><i class="fa-solid fa-basket-shopping"></i> ADD TO CART</button>
+                            <button onClick={() => sendBasket(item)} className='btn btn-light border-primary'><i className="fa-solid fa-basket-shopping"></i> ADD TO CART</button>
                         </div>
                     </div>
                 </div>

@@ -1,14 +1,24 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Clothes from "../clothes/Clothes";
-import SingleClothe from "../clothes/singleProduct/Single";
+import SingleClothe from "../clothes/Single";
 import Electronics from "../electronics/Electronics";
-import SingleElectronic from "../electronics/singleProduct/Single";
+import SingleElectronic from "../electronics/Single";
 import Accessories from "../accessories/Accessories";
-import SingleAccessory from "../accessories/singleProduct/Single";
+import SingleAccessory from "../accessories/Single";
 import Recommend from "./dashboard/recommendations/Recommend";
-import SingleRecommendations from "./dashboard/recommendations/singleProduct/Single";
+import SingleRecommendations from "./dashboard/recommendations/Single";
 import Dashboard from "./dashboard/Dashboard";
+import Cheap from "./dashboard/cheap/Cheap";
+import SingleCheap from "./dashboard/cheap/Single";
+import Beauty from "../beauty/Beauty";
+import SingleBeauty from "../beauty/Single";
+import SingleSport from "../sport/Single";
+import Sport from "../sport/Sport";
+import Jewelry from "../jewelry/Jewelry";
+import SingleJewelry from "../jewelry/Single";
+import Basket from "../basket/Basket";
+
 import "./Main.css";
 
 export default function Main() {
@@ -18,6 +28,7 @@ export default function Main() {
   };
 
   const [isOpen, setIsOpen] = useState(false);
+  const [active, setActive] = useState(null)
 
   const toggleNav = () => {
     setIsOpen(!isOpen);
@@ -25,7 +36,13 @@ export default function Main() {
 
   return (
     <div>
-      <header>
+      <div className="main_header">
+        <ul>
+          <li><i class="fa-solid fa-location-dot"></i> Tashkent</li>
+          <li><i class="fa-solid fa-truck"></i> Free delivery service to your home in 1 day</li>
+        </ul>
+      </div>
+      <header>  
         <ul>
           <li>
             <a href="/">Akaldosama</a>
@@ -43,32 +60,51 @@ export default function Main() {
               </button>
             </span>
             <span>
-              <Link>
+              <Link to='basket'>
                 <i class="fa-solid fa-basket-shopping"></i> Basket
               </Link>
             </span>
           </li>
         </ul>
       </header>
+
       <nav>
         <ul>
           <li>
-            <Link to="electronics">Electronics</Link>
+            <Link to="electronics"
+                  className={active === "electronics" ? 'active' : ''}
+                  onClick={() => setActive("electronics")}
+            >Electronics</Link>
           </li>
           <li>
-            <Link to="clothes">Clothes</Link>
+            <Link to="clothes"
+                  className={active === "clothes" ? 'active' : ''}
+                  onClick={() => setActive("clothes")}
+            >Clothes</Link>
           </li>
           <li>
-            <Link to="accessories">Accessories</Link>
+            <Link to="accessories"
+                  className={active === "accessories" ? 'active' : ''}
+                  onClick={() => setActive("accessories")}
+            >Accessories</Link>
           </li>
           <li>
-            <a href="#">Beauty Products</a>
+            <Link to="beauty"
+                  className={active === "beauty" ? 'active' : ''}
+                  onClick={() => setActive("beauty")}
+            >Beauty Products</Link>
           </li>
           <li>
-            <a href="#">Sport</a>
+            <Link to="sport" 
+                  className={active === "sport" ? 'active' : ''} 
+                  onClick={() => setActive("sport")}
+            >Sport</Link>
           </li>
           <li>
-            <a href="#">Construction</a>
+            <Link to="jewelry"
+                  className={active === "jewelry" ? 'active' : ''} 
+                  onClick={() => setActive("jewelry")}
+            >Jewelry</Link>
           </li>
         </ul>
       </nav>
@@ -98,18 +134,18 @@ export default function Main() {
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="#" className="navbar-link">
+              <Link to="beauty" className="navbar-link">
                 Beauty Products
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="#" className="navbar-link">
+              <Link to="sport" className="navbar-link">
                 Sport
               </Link>
             </li>
             <li className="navbar-item">
-              <Link to="#" className="navbar-link">
-                Construction
+              <Link to="jewelry" className="navbar-link">
+                Jewelry
               </Link>
             </li>
           </ul>
@@ -128,13 +164,26 @@ export default function Main() {
       </div>
 
       <Routes>
+        <Route path="basket" element={<Basket />}></Route>
         <Route
-          path="/"
-          element={<Dashboard searchQuery={searchQuery} />}
+         path='/' 
+         element={<Dashboard />}
+        ></Route>
+        <Route
+          path="recommend"
+          element={<Recommend searchQuery={searchQuery} />}
         ></Route>
         <Route
           path="single_recommendation/:id"
           element={<SingleRecommendations />}
+        ></Route>
+        <Route
+          path="cheap"
+          element={<Cheap searchQuery={searchQuery} />}
+        ></Route>
+        <Route
+          path="single_cheap/:id"
+          element={<SingleCheap />}
         ></Route>
         <Route
           path="electronics"
@@ -156,6 +205,30 @@ export default function Main() {
         <Route
           path="single_accessory/:id"
           element={<SingleAccessory />}
+        ></Route>
+        <Route
+          path="beauty"
+          element={<Beauty searchQuery={searchQuery} />}
+        ></Route>
+        <Route
+          path="single_beauty/:id"
+          element={<SingleBeauty />}
+        ></Route>
+        <Route
+          path="sport"
+          element={<Sport searchQuery={searchQuery} />}
+        ></Route>
+        <Route
+          path="single_sport/:id"
+          element={<SingleSport />}
+        ></Route>
+        <Route
+          path="jewelry"
+          element={<Jewelry searchQuery={searchQuery} />}
+        ></Route>
+        <Route
+          path="single_jewelry/:id"
+          element={<SingleJewelry />}
         ></Route>
       </Routes>
 

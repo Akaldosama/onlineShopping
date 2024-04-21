@@ -1,0 +1,53 @@
+.basket{
+    display: flex;
+    gap: 30px;
+    padding: 20px 50px;
+}
+.basket .parent{
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: start;
+    border: 1px solid hsl(0, 0%, 60%);
+    padding: 20px;
+    width: calc(100% / 3);
+}
+aside{
+    border: 1px solid hsl(0, 0%, 60%);
+    padding: 10px;
+    right : 0;
+    top: 100px;
+    z-index: 3;
+    height: 100%;
+    width: calc(100% / 3);
+}
+.basket .parent .child{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid black;
+}
+.basket .box{
+    width: calc(100% / 2);
+    padding: 20px;
+    height: 200px;
+}
+.basket .deleteBtn{
+    display: flex;
+}
+.basket .delete{
+    margin-left: auto;
+}
+.basket img{
+    width: 100%;
+    object-fit: contain;
+    height: 100%;
+}
+.basket .count{
+    display: flex;
+    align-items: center;
+}
+.basket .count span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -3,33 +3,33 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import '../ForAllComponents.css'
 
-export default function Electronics({ searchQuery }) {
-  const [electronics, setElectronics] = useState([]);
+export default function Sport({ searchQuery }) {
+  const [sport, setSport] = useState([]);
 
   // search
-  const filteredElectronics = electronics?.filter(
-    (electronic) =>
-      electronic?.brand?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
-      electronic?.model?.toLowerCase().includes(searchQuery?.toLowerCase())
+  const filteredSport = sport?.filter(
+    (singleSport) =>
+      singleSport?.brand?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+      singleSport?.model?.toLowerCase().includes(searchQuery?.toLowerCase())
   );
 
   // pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const electronicsPerPage = 24;
+  const sportPerPage = 24;
 
-  const indexOfLastElectronic = currentPage * electronicsPerPage;
-  const indexOfFirstElectronic = indexOfLastElectronic - electronicsPerPage;
-  const currentElectronics = filteredElectronics?.slice(
-    indexOfFirstElectronic,
-    indexOfLastElectronic
+  const indexOfLastSport = currentPage * sportPerPage;
+  const indexOfFirstSport = indexOfLastSport - sportPerPage;
+  const currentSport = filteredSport?.slice(
+    indexOfFirstSport,
+    indexOfLastSport
   );
 
   const fetchData = () => {
     axios
-      .get("http://localhost:8000/electronics")
+      .get("http://localhost:8000/sport")
       .then((res) => {
         console.log(res.data);
-        setElectronics(res.data);
+        setSport(res.data);
       })
       .catch((error) => {
         console.log(error);
@@ -39,6 +39,7 @@ export default function Electronics({ searchQuery }) {
   useEffect(() => {
     fetchData();
   }, []);
+
 
   const sendBasket = (item) => {
     axios.post('http://localhost:8000/basket', item)
@@ -50,17 +51,18 @@ export default function Electronics({ searchQuery }) {
 }
 
 
+
   return (
     <div>
       <div className="wrapper">
-        <div className="title">Electronics</div>
-        <p>{electronics.length} products</p>
+        <div className="title">Sport</div>
+        <p>{sport.length} products</p>
         <div className="parent">
-          {currentElectronics?.map((item, index) => {
+          {currentSport?.map((item, index) => {
             return (
               <div className="child" key={index}>
                 <div className="box">
-                  <Link to={`/single_electronic/${item.id 
+                  <Link to={`/single_sport/${item.id 
                   }`}>
                     <img src={item.image} alt="" />
                   </Link>
@@ -72,9 +74,7 @@ export default function Electronics({ searchQuery }) {
                   </p>
                   <span>
                     <h4>{item.price}$</h4>
-                    <button onClick={() => sendBasket(item)} className='btn'>
-                      <i className="fa-solid fa-basket-shopping"></i>
-                    </button>
+                    <button onClick={() => sendBasket(item)} className='btn'><i className="fa-solid fa-basket-shopping"></i></button>
                   </span>
                 </div>
               </div>
@@ -89,13 +89,13 @@ export default function Electronics({ searchQuery }) {
           </button>
           <span>
             {currentPage} /{" "}
-            {Math.ceil(filteredElectronics?.length / electronicsPerPage)}
+            {Math.ceil(filteredSport?.length / sportPerPage)}
           </span>
           <button
             onClick={() => setCurrentPage(currentPage + 1)}
             disabled={
               currentPage ===
-              Math.ceil(filteredElectronics?.length / electronicsPerPage)
+              Math.ceil(filteredSport?.length / sportPerPage)
             }>
             Next
           </button>
