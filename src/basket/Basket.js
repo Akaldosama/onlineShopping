@@ -50,14 +50,14 @@ export default function Basket() {
                             <div className="count">
                                 <p>Amount:</p>
                                 <span>
-                                <button onClick={() => changeCount(index, item.count - 1)} className={`btn border mx-3 ${item.count <= 1 ? 'disabled' : ''}`} disabled={item.count <= 1}><i className="fa-solid fa-minus"></i></button> 
+                                <button onClick={() => changeCount(index, item.count - 1)} className={`btn ${item.count <= 1 ? 'disabled' : ''}`} disabled={item.count <= 1}><i className="fa-solid fa-minus"></i></button> 
                                     {item.count}
-                                <button onClick={() => changeCount(index, item.count + 1)} className='btn border mx-3'><i className="fa-solid fa-plus"></i></button>
+                                <button onClick={() => changeCount(index, item.count + 1)} className='btn'><i className="fa-solid fa-plus"></i></button>
                                 </span> 
                             </div>
-                            <div className='deleteBtn'>
-                                <button className='delete btn border' onClick={() => delFunc(item.id)}><i class="fa-solid fa-trash-can"></i></button>
-                            </div>
+                        </div>
+                        <div className='box'>
+                                <button className='delete btn' onClick={() => delFunc(item.id)}><i class="fa-solid fa-trash-can"></i></button>
                         </div>
                     </div>
                 );

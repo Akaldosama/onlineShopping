@@ -114,9 +114,14 @@ export default function Main() {
           <Link to='/' className="navbar-logo text-decoration-none">
             Akaldosama
           </Link>
+          <div className="two_links">
+          <Link to='basket' className="navbar-toggle">
+            <i class="fa-solid fa-basket-shopping"></i>
+          </Link>
           <button className="navbar-toggle" onClick={toggleNav}>
             <i className={isOpen ? 'fas fa-times' : 'fas fa-bars'}></i>
           </button>
+          </div>
           <ul className={isOpen ? 'navbar-menu active' : 'navbar-menu'}>
             <li className="navbar-item">
               <Link to="electronics" className="navbar-link">
