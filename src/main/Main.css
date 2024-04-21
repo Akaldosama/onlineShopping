@@ -478,6 +478,9 @@ footer ul li i:nth-child(4) {
     width: 100%;
     text-align: center;
   }
+  footer ul{
+    padding: 0;
+  }
   footer .child ul li{
     text-align: center;
   }
