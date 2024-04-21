@@ -21,6 +21,7 @@ aside{
     z-index: 3;
     height: 100%;
     width: calc(100% / 3);
+    z-index: 0;
 }
 .basket .parent .child{
     width: 100%;
