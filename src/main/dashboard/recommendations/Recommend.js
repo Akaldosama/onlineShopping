@@ -52,7 +52,7 @@ export default function Recommend({ searchQuery }) {
       <div className="wrapper">
         <CarouselProvider
           naturalSlideWidth={100}
-          naturalSlideHeight={35}
+          naturalSlideHeight={45}
           totalSlides={3}
           isPlaying={true}
         >

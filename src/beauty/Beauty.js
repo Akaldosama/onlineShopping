@@ -58,7 +58,7 @@ export default function Beauty({ searchQuery }) {
             return (
               <div className="child" key={index}>
                 <div className="box">
-                  <Link to={`/single_accessory/${item.id 
+                  <Link to={`/single_beauty/${item.id 
                   }`}>
                     <img src={item.image} alt="" />
                   </Link>
