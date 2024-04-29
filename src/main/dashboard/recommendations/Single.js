@@ -1,11 +1,11 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
+import ModalComponent from '../../../modal/Modal' 
 import '../../../ForAllSingleComponents.css'
-import ModalComponent from '../../../modal/Modal'
 
 
-export default function SingleRecommendations() {
+export default function SingleRec() {
 
     const [modal, setModal] = useState(false)
     
@@ -22,7 +22,7 @@ export default function SingleRecommendations() {
     const fetchData = () => {
         axios.get('http://localhost:8000/recommendations')
         .then((res) => {
-            setSingle(res?.data?.filter(item => item.id == id))
+            setSingle(res.data.filter(item => item.id == id))
         }).catch(err => console.log(err))
     }
 
@@ -30,11 +30,15 @@ export default function SingleRecommendations() {
         fetchData()
     }, [])
 
+    const calculatePrice = () => {
+        return count * single[0]?.price; // Assuming single[0] contains the item data
+    }
+
 
 
   return (
-    <div className='wrapper'>
-        <ModalComponent open={modal} toggle={toggle} />     
+    <div className='container'>
+        <ModalComponent open={modal} toggle={toggle}  itemModel={single[0]?.model} itemPrice={calculatePrice()} itemCount={count} itemSize={size} />     
 
         {
             single?.map((item, index) => {
@@ -43,21 +47,21 @@ export default function SingleRecommendations() {
                         <img src={item.image} alt="" />
                     </div>
                     <div className="child">
-                        <h3>{item.brand}</h3>
+                        <h3>{item.model}</h3>
                         <p>Size: {size}</p>
                         <div className='sizeBtnDiv'>
-                        {Object?.values(item.size)?.map((size, index) => (
+                        {Object.values(item.size).map((size, index) => (
                         <button key={index} className='btn btn-light border' value={size} onClick={(e) => setSize(e.target.value)}>{size}</button>
                         ))}
                         </div>
                         <p>Amount:</p>
                         <span>
-                            <button onClick={() => setCount((prev) => count <= 1 ? 1 : prev - 1)}><i class="fa-solid fa-minus"></i></button>
+                            <button onClick={() => setCount((prev) => count <= 1 ? 1 : prev - 1)} className='btn'><i class="fa-solid fa-minus"></i></button>
                             {count}
-                            <button onClick={() => setCount((prev) => prev + 1)}><i class="fa-solid fa-plus"></i></button>
+                            <button onClick={() => setCount((prev) => prev + 1)} className='btn'><i class="fa-solid fa-plus"></i></button>
                         </span>
                         <p>Price:</p>
-                        <h3 className='price'>{count * item.price}$</h3>
+                        <h3 className='price'>{calculatePrice()}$</h3>
                         <p className='desc'>{item.description}</p>
                         <div className='box'>
                             <button onClick={() => toggle(true)} className='btn btn-primary'>BUY NOW</button>

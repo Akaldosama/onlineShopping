@@ -69,7 +69,7 @@ export default function Accessories({ searchQuery }) {
                   </p>
                   <span>
                     <h4>{item.price}$</h4>
-                    <button onClick={() => sendBasket(item)} className='btn btn-light border-primary'>
+                    <button onClick={() => sendBasket(item)} className='btn'>
                       <i className="fa-solid fa-basket-shopping"></i>
                     </button>
                   </span>

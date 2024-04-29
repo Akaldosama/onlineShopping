@@ -1,4 +1,4 @@
-import React , { useEffect, useState }  from "react";
+import React, { useEffect, useState } from "react";
 import {
   CarouselProvider,
   Slider,
@@ -9,35 +9,27 @@ import {
 import "pure-react-carousel/dist/react-carousel.es.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import '../../../ForAllComponents.css'
+import "../../../ForAllComponents.css";
 
 export default function Recommend({ searchQuery }) {
-  const [recommendations, setRecommendations] = useState([]);
-  
+  const [recommend, setRecommend] = useState([]);
 
   // search
-  const filteredRecommendations = recommendations?.filter(
-    (recommend) =>
-      recommend?.brand?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
-      recommend?.model?.toLowerCase().includes(searchQuery?.toLowerCase())
-  );
+  const filteredRec = recommend?.filter(
+    (singleRecommend) =>
+    singleRecommend?.brand?.toLowerCase().includes(searchQuery?.toLowerCase()) ||
+    singleRecommend?.model?.toLowerCase().includes(searchQuery?.toLowerCase())
+    );
 
-  // pagination
-  const [currentPage, setCurrentPage] = useState(1);
-  const recommendationsPerPage = 24;
-  
-  const indexOfLastRecommend = currentPage * recommendationsPerPage;
-  const indexOfFirstRecommend = indexOfLastRecommend - recommendationsPerPage;
-  const currentRecommendations = filteredRecommendations?.slice(indexOfFirstRecommend, indexOfLastRecommend);
+
+
   const fetchData = () => {
     axios
-    .get("http://localhost:8000/recommendations")
-    .then((res) => {
-      setRecommendations(res?.data);
-      console.log(recommendations)
-      console.log(filteredRecommendations)
-    })
-    .catch((error) => {
+      .get("http://localhost:8000/recommendations")
+      .then((res) => {
+        setRecommend(res.data);
+        })
+      .catch((error) => {
         console.log(error);
       });
   };
@@ -45,6 +37,16 @@ export default function Recommend({ searchQuery }) {
   useEffect(() => {
     fetchData();
   }, []);
+
+
+  
+  const sendBasket = (item) => {
+    axios.post('http://localhost:8000/basket', item)
+        .then((res) => {
+            alert('Element added successfully', res.data);
+        })
+    .catch(err => console.log(err));
+}
 
 
   return (
@@ -93,49 +95,35 @@ export default function Recommend({ searchQuery }) {
       <div className="wrapper">
         <div className="title">Recommendations</div>
         <div className="parent">
-          {currentRecommendations?.map((item, index) => {
-            return (
-              <div className="child" key={index}>
-                <div className="box">
-                  <Link to={`/single_recommendation/${item.id 
-                  }`}>
-                    <img src={item.image} alt="" />
-                  </Link>
-                </div>
-                <div className="box">
-                  <p>{item.model}</p>
-                  <span>
-                    <h4>{item.price}$</h4>
-                    <i class="fa-solid fa-basket-shopping"></i>
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-          </div>
-          <center>
-          <div className="pagination">
-            <button
-              onClick={() => setCurrentPage(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              Prev
-            </button>
-            <span>
-              {currentPage} /{" "}
-              {Math.ceil(filteredRecommendations.length / recommendationsPerPage)}
-            </span>
-            <button
-              onClick={() => setCurrentPage(currentPage + 1)}
-              disabled={
-                currentPage ===
-                Math.ceil(filteredRecommendations.length / recommendationsPerPage)
-              }>
-              Next
-            </button>
-          </div>
-        </center>
+          <CarouselProvider
+          naturalSlideWidth={100}
+          naturalSlideHeight={30}
+          totalSlides={recommend.length}
+          isPlaying={false}
+          className="h-100">
+            <Slider className="d-flex h-25">
+              {recommend?.map((item, index) => {
+                return (
+                  <Slide index={0} key={index} style={{width: 230}} className="mx-2">
+                    <div className="card h-100">
+                      <Link to={`/single_recommend/${item.id}`}>
+                        <img className="card-img-top" src={item.image} alt="Card image cap" />
+                      </Link>
+                      <div className="card-body">
+                        <p className="card-title">{item.model}</p>
+                        <span className="d-flex justify-content-between align-items-center position-absolute fixed-bottom">
+                          <b>${item.price}</b>
+                          <button onClick={() => sendBasket(item)} className="btn btn-primary"><i className="fa-solid fa-cart-shopping"></i></button>
+                        </span>
+                      </div>
+                    </div>
+                  </Slide>
+                );
+              })}
+            </Slider>
+          </CarouselProvider>
         </div>
+      </div>
     </div>
   );
 }

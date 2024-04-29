@@ -7,7 +7,7 @@ import SingleElectronic from "../electronics/Single";
 import Accessories from "../accessories/Accessories";
 import SingleAccessory from "../accessories/Single";
 import Recommend from "./dashboard/recommendations/Recommend";
-import SingleRecommendations from "./dashboard/recommendations/Single";
+import SingleRecommend from "./dashboard/recommendations/Single";
 import Dashboard from "./dashboard/Dashboard";
 import Cheap from "./dashboard/cheap/Cheap";
 import SingleCheap from "./dashboard/cheap/Single";
@@ -42,6 +42,7 @@ export default function Main() {
           <li><i class="fa-solid fa-truck"></i> Free delivery service to your home in 1 day</li>
         </ul>
       </div>
+      
       <header>  
         <ul>
           <li>
@@ -179,8 +180,8 @@ export default function Main() {
           element={<Recommend searchQuery={searchQuery} />}
         ></Route>
         <Route
-          path="single_recommendation/:id"
-          element={<SingleRecommendations />}
+          path="single_recommend/:id"
+          element={<SingleRecommend />}
         ></Route>
         <Route
           path="cheap"

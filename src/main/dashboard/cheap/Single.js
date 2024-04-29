@@ -47,7 +47,7 @@ export default function SingleCheap() {
                         <img src={item.image} alt="" />
                     </div>
                     <div className="child">
-                        <h3>{item.brand}</h3>
+                        <h3>{item.model}</h3>
                         <p>Size: {size}</p>
                         <div className='sizeBtnDiv'>
                         {Object.values(item.size).map((size, index) => (
